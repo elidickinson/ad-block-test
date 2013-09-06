@@ -1,19 +1,17 @@
-function ad_block_test(callback) {
-	var $ = jQuery || $;
-	$("body").append('<div class="ad-sponsor" id="sponsored-ad" style="position:absolute;left:-999px;font-size:2px">&nbsp;</div>');
-	$(document).ready(function(){
-		setTimeout(function(){
-			var testad = $("#sponsored-ad");
-			console.log(testad, testad.height());
-			var ads_blocked = (testad.height() == 0);
-			// should testad missing altogether count as ad blocked? Could
-			// also just mean  something went wrong.
-			if (testad.length == 1) {
-				testad.remove();
-				callback(ads_blocked);
-			}
-		}, 50);
-	});
+function ad_block_test(callback, ad_id) {
+	var testad_id = ad_id ? ad_id : "sponsored-ad";
+	var testad = document.createElement("DIV");
+	testad.id = testad_id;
+	testad.style.position = "absolute";
+	testad.style.left = "-999px";
+	testad.appendChild(document.createTextNode("&nbsp;"))
+	document.body.appendChild(testad); // add test ad to body
+
+	// wait a bit and then check it's height
+	setTimeout(function() {
+		callback(testad.clientHeight == 0);
+		document.body.removeChild(testad);
+	}, 100);
 }
 
 // will automatically run and call the callback if its defined.
