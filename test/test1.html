@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>Ad Block Test Page</title>
+
+	<!-- JQuery is not required; just using it on this test page -->
+	<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+
+	<!--
+		ABT: Instructions
+
+		There are a couple of ways to set up this script, but I think the easiest and most
+		foolproof is to create a script block just before the </body> of your page that
+		contains the following:
+		1. An ad_block_test_callback function that contains the logic for what you want to
+			do when an ad blocker is detected (or not)
+		2. Copy and paste the contents of abt.min.js.
+
+		Note: Ad Blockers actively try evade Ad Block Detection code. By inlining the ABT
+		script you make it harder for them to identify. If you do wish to include it as
+		an external script, you should rename the file to something else. It's really
+		short though; I think you're better off saving a network request.
+	-->
+</head>
+<body>
+	<h1>ABT Test Page</h1>
+	<h2>Ad Blocker Detected: <span id="status">unknown</span></h2>
+	<h2>ABT Version: <span id="abt_version">unknown</span></h2>
+
+
+	<script>
+		function ad_block_test_callback(ads_blocked, abt_version_string) {
+			if (ads_blocked) {
+				// Example of tracking ad block event via Google Analytics:
+				// var _gaq = _gaq || [];
+				// _gaq.push(['_trackEvent', 'Ads', 'AdsBlocked', 'Ad Block Test v'+abt_version_string]);
+			}
+
+			// For now we just update text on the page
+			$("#status").text(ads_blocked);
+			$("#abt_version").text(abt_version_string);
+		}
+
+		// copy-pasted abt.min.js below ----
+		function ad_block_test(a,b){var c="0.1",d=b?b:"sponsored-ad",e=document.createElement("DIV");e.id=d,e.style.position="absolute",e.style.left="-999px",e.appendChild(document.createTextNode("&nbsp;")),document.body.appendChild(e),setTimeout(function(){e&&(a(e&&0==e.clientHeight,c),document.body.removeChild(e))},100)}"function"==typeof ad_block_test_callback&&ad_block_test(ad_block_test_callback);
+		// end copy-pasted abt.min.js ------
+	</script>
+</body></html>
