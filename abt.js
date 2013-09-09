@@ -1,5 +1,6 @@
-function ad_block_test(callback, ad_id) {
-	var testad_id = ad_id ? ad_id : "sponsored-ad";
+function ad_block_test(callback, testad_id) {
+	var version = "0.1";
+	var testad_id = testad_id ? testad_id : "sponsored-ad";
 	var testad = document.createElement("DIV");
 	testad.id = testad_id;
 	testad.style.position = "absolute";
@@ -7,10 +8,14 @@ function ad_block_test(callback, ad_id) {
 	testad.appendChild(document.createTextNode("&nbsp;"))
 	document.body.appendChild(testad); // add test ad to body
 
-	// wait a bit and then check it's height
+	// wait a bit and then check its height
 	setTimeout(function() {
-		callback(testad.clientHeight == 0);
-		document.body.removeChild(testad);
+		if (testad) {
+			callback(testad && (testad.clientHeight == 0), version);
+			document.body.removeChild(testad);
+			// Should testad disappearing entirely count as an ad block?
+			// Currently it does not fire callback at all in this case
+		}
 	}, 100);
 }
 
