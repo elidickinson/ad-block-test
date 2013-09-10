@@ -1,10 +1,6 @@
 <html>
 <head>
 	<title>Ad Block Test Page</title>
-
-	<!-- JQuery is not required; just using it on this test page -->
-	<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
-
 	<!--
 		ABT: Instructions
 
@@ -25,19 +21,21 @@
 	<h1>ABT Test Page</h1>
 	<h2>Ad Blocker Detected: <span id="status">unknown</span></h2>
 	<h2>ABT Version: <span id="abt_version">unknown</span></h2>
+	<p>This is a demo of <a href="https://github.com/elidickinson/ad-block-test">ad-block-test</a>, a short snippet of code for detecting many common Ad Blocker plugins. View the source for instructions.</p>
 
 
 	<script>
 		function ad_block_test_callback(ads_blocked, abt_version_string) {
+			// Update text on the page based on the results of the ad block test
+			document.getElementById("status").innerHTML = ads_blocked;
+			document.getElementById("abt_version").innerHTML = abt_version_string;
+
 			if (ads_blocked) {
-				// Example of tracking ad block event via Google Analytics:
+				// we could preform a more useful action here, like logging an event in Google Analytics:
+
 				// var _gaq = _gaq || [];
 				// _gaq.push(['_trackEvent', 'Ads', 'AdsBlocked', 'Ad Block Test v'+abt_version_string]);
 			}
-
-			// For now we just update text on the page
-			$("#status").text(ads_blocked);
-			$("#abt_version").text(abt_version_string);
 		}
 
 		// copy-pasted abt.min.js below ----
