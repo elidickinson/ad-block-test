@@ -7,11 +7,11 @@
 		There are a couple of ways to set up this script, but I think the easiest and most
 		foolproof is to create a script block just before the </body> of your page that
 		contains the following:
-		1. An ad_block_test_callback function that contains the logic for what you want to
-			do when an ad blocker is detected (or not)
-		2. Copy and paste the contents of abt.min.js.
+		1. The contents of abt.min.js (see note below)
+		2. A callback function that runs after the script checks for an ad blocker
+		3. Call ad_block_test and pass it the callback function
 
-		Note: Ad Blockers actively try evade Ad Block Detection code. By inlining the ABT
+		Note: Ad Blockers actively try evade Ad Block detection code. By inlining the ABT
 		script you make it harder for them to identify. If you do wish to include it as
 		an external script, you should rename the file to something else. It's really
 		short though; I think you're better off saving a network request.
@@ -23,23 +23,24 @@
 	<h2>ABT Version: <span id="abt_version">unknown</span></h2>
 	<p>This is a demo of <a href="https://github.com/elidickinson/ad-block-test">ad-block-test</a>, a short snippet of code for detecting many common Ad Blocker plugins. View the source for instructions.</p>
 
+	<script src="../abt.js"></script> <!-- only use this for testing, see below -->
 
 	<script>
+		// NOTE: When deploying this in production, paste abt.min.js here instead of linking to abt.js above
+
+		// define callback function
 		function ad_block_test_callback(ads_blocked, abt_version_string) {
 			// Update text on the page based on the results of the ad block test
 			document.getElementById("status").innerHTML = ads_blocked;
 			document.getElementById("abt_version").innerHTML = abt_version_string;
 
+			// we could preform a more useful action here, like logging an event in Google Analytics:
 			if (ads_blocked) {
-				// we could preform a more useful action here, like logging an event in Google Analytics:
-
 				// var _gaq = _gaq || [];
 				// _gaq.push(['_trackEvent', 'Ads', 'AdsBlocked', 'Ad Block Test v'+abt_version_string]);
 			}
 		}
 
-		// copy-pasted abt.min.js below ----
-		function ad_block_test(a,b){var c="0.1",d=b?b:"sponsored-ad",e=document.createElement("DIV");e.id=d,e.style.position="absolute",e.style.left="-999px",e.appendChild(document.createTextNode("&nbsp;")),document.body.appendChild(e),setTimeout(function(){e&&(a(e&&0==e.clientHeight,c),document.body.removeChild(e))},100)}"function"==typeof ad_block_test_callback&&ad_block_test(ad_block_test_callback);
-		// end copy-pasted abt.min.js ------
+		ad_block_test(ad_block_test_callback); // document.body should exist when you call this, that's why it's not in <head>
 	</script>
 </body></html>
