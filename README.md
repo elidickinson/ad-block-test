@@ -13,7 +13,10 @@ Tested against:
 
 
 Script Goals:
- - Be able to gather general statistics about how many visitors are actively blocking ads via Google Analytics, Mixpanel, or other similar system.
+ - Be able to gather general statistics about how many visitors are actively blocking ads via Google Analytics, Mixpanel, or other similar system.*
  - Minimal performance impact on visitors, whether they're blocking ads or not. Script doesn't make any additional network requests.
  - Be conservative. Better to miss some ad blockers (false negative) than to incorrectly flag some browsers as having an ad blocker (false positive).
  - Minimal prerequisites. Does not require JQuery. Does not require a particular ad serving platform or even any actual ads on the page.
+
+
+* Note: Consider that people who block ads may also be using "Privacy" filters or even NoScript, which would mean your analytics software won't track anything.
