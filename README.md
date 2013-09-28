@@ -39,5 +39,4 @@ Script Goals:
  - Be conservative. Better to miss some ad blockers (false negative) than to incorrectly flag some browsers as having an ad blocker (false positive).
  - Minimal prerequisites. Does not require JQuery. Does not require a particular ad serving platform or even any actual ads on the page.
 
-
-* Note: Consider that people who block ads may also be using "Privacy" filters or even NoScript, which would mean your analytics software won't track anything.
+Note: People who block ads may also be blocking your analytics software. Some may even be running NoScript and blocking all javascript on your site.
