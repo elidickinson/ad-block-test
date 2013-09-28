@@ -1,7 +1,9 @@
 # ABT - Ad Block Tester
 ##Simple script to test if the browser is blocking ads.
 
-See test/test1.html for usage example
+Introduction to project and interactive demo on my blog: http://esd.io/blog/detecting-adblock-javascript.html
+
+See test/ directory for other usage examples.
 
 Should work against any ad blocking plugin that subscribes to EasyList (or similar) and collapses ad elements.
 
