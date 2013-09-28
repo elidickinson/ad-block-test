@@ -3,7 +3,7 @@ function ad_block_test(callback, testad_id) {
 		// right now just silently fail if the body element isn't there
 		return;
 	}
-	var version = "0.1";
+	var version = "0.1-dev";
 	var testad_id = testad_id ? testad_id : "sponsored-ad";
 	var testad = document.createElement("DIV");
 	testad.id = testad_id;
