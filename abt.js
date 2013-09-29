@@ -17,10 +17,10 @@ function ad_block_test(callback, testad_id) {
 		if (testad) {
 			var blocked = (testad.clientHeight == 0);
 			try {
-				// AdBlock Plus or Ad Block Edge uses the following property to hide elements
-				//  to hide elements. Value will be something like:
+				// AdBlock Plus or AdBlock Edge in FFox uses -moz-binding property to hide elements
+				//  They also usually collapse the element, depending on settings. Value looks like:
 				//  url("about:abp-elemhidehit?668798490716#dummy")
-				blocked = blocked || (getComputedStyle(testad).getPropertyValue('-moz-binding') != "");
+				blocked = blocked || (getComputedStyle(testad).getPropertyValue('-moz-binding').indexOf('about:') !== -1);
 			} catch (err) {
 				// log errors
 				if(console && console.log) { console.log("ad-block-test error",err); }
