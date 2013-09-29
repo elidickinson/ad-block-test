@@ -17,7 +17,9 @@ function ad_block_test(callback, testad_id) {
 		if (testad) {
 			var blocked = (testad.clientHeight == 0);
 			try {
-				// AdBlock Plus or Ad Block Edge without placeholders uses the following property to hide elements
+				// AdBlock Plus or Ad Block Edge uses the following property to hide elements
+				//  to hide elements. Value will be something like:
+				//  url("about:abp-elemhidehit?668798490716#dummy")
 				blocked = blocked || (getComputedStyle(testad).getPropertyValue('-moz-binding') != "");
 			} catch (err) {
 				// log errors
@@ -28,5 +30,5 @@ function ad_block_test(callback, testad_id) {
 			// Should testad disappearing entirely count as an ad block?
 			// Currently it does not fire callback at all in this case
 		}
-	}, 125);
+	}, 175);
 }
