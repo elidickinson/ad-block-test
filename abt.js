@@ -3,7 +3,7 @@ function ad_block_test(callback, testad_id) {
 		// right now just silently fail if the body element isn't there
 		return;
 	}
-	var version = "0.1.1-dev";
+	var version = "0.1.2-dev";
 	var testad_id = testad_id ? testad_id : "sponsored-ad";
 	var testad = document.createElement("DIV");
 	testad.id = testad_id;
@@ -20,13 +20,13 @@ function ad_block_test(callback, testad_id) {
 				// AdBlock Plus or AdBlock Edge in FFox uses -moz-binding property to hide elements
 				//  They also usually collapse the element, depending on settings. Value looks like:
 				//  url("about:abp-elemhidehit?668798490716#dummy")
-				blocked = blocked || (getComputedStyle(testad).getPropertyValue('-moz-binding').indexOf('about:') !== -1);
+				// blocked = blocked || (getComputedStyle(testad).getPropertyValue('-moz-binding').indexOf('about:') !== -1);
 			} catch (err) {
 				// log errors
 				if(console && console.log) { console.log("ad-block-test error",err); }
 			}
 			callback(blocked, version);
-			// document.body.removeChild(testad);
+			document.body.removeChild(testad);
 			// Should testad disappearing entirely count as an ad block?
 			// Currently it does not fire callback at all in this case
 		}
