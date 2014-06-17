@@ -11,7 +11,7 @@ Introduction to project and interactive demo on my blog: http://esd.io/blog/dete
 
 // ^^^^ Paste contents of abt.min.js here ^^^^
 
-ad_block_text(function(is_blocked){
+ad_block_test(function(is_blocked){
  // Note this function may not run until some time later.
  if(is_blocked) {
   // if blocker detected, log a Google Analytics event
