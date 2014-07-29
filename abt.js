@@ -4,7 +4,7 @@ function ad_block_test(callback, testad_id) {
 		return;
 	}
 	var version = "0.1.2-dev";
-	var testad_id = testad_id ? testad_id : "sponsored-ad";
+	var testad_id = testad_id ? testad_id : "sponsorText";
 	var testad = document.createElement("DIV");
 	testad.id = testad_id;
 	testad.style.position = "absolute";
